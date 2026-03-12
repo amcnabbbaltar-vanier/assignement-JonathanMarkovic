@@ -7,22 +7,28 @@ using UnityEngine.UI;
 public class CharacterMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    public float speed = 0.5f;
-    public float jumpForce = 5.0f;
     private Text scoreText;
-    public int health = 3;
     private bool canDoubleJump;
     public LayerMask ground;
-    private float timer = 0;
-
     private float raycastDistance = 0.5f;
+
+    //status timers
+    private float jumpBoostTimer = 0;
+    private float speedBoostTimer = 0;
+
+    //Character stats
+    public float jumpForce = 10.0f;
+    public int health = 3;
+    private float jumpTimer = 0;
+    public float speed = 0.5f;
+    private float speedMultiplier = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         //scoreText = GameObject.FindWithTag("Score").GetComponent<Text>();
-        canDoubleJump = true;
+        canDoubleJump = false;
     }
 
     private float horizontalInput;
@@ -42,11 +48,19 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetButton("Jump"))
         {
-            timer += Time.deltaTime;
+            jumpTimer += Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 1.0f;
+        } else
+        {
+            speed = 0.5f;
         }
 
         //* Get Jumping
-        if (Input.GetButtonUp("Jump") || timer >= 3)
+        if (Input.GetButtonUp("Jump") || jumpTimer >= 3)
         {
             if (isGrounded() || canDoubleJump)
             {
@@ -55,20 +69,44 @@ public class CharacterMovement : MonoBehaviour
                 if (!isGrounded())
                 {
                     canDoubleJump = false;
-                } else
+                }
+                else
                 {
-                    canDoubleJump = true;
+                    if (jumpBoostTimer > 0)
+                    {
+                        canDoubleJump = true;
+                    }
                 }
             }
 
-            timer = 0;
+            jumpTimer = 0;
         } 
+
+        if (jumpBoostTimer > 0)
+        {
+            Debug.Log("Bouncy");
+            jumpBoostTimer -= Time.deltaTime;
+        } else
+        {
+            jumpBoostTimer = 0;
+        }
+
+        if (speedBoostTimer > 0)
+        {
+            speedBoostTimer -= Time.deltaTime;
+            Debug.Log("Super Fast" + speedMultiplier);
+        }
+        else
+        {
+            speedBoostTimer = 0;
+            speedMultiplier = 1.0f;
+        }
     }
 
     private void FixedUpdate()
     {
         //* Moving the player based on input
-        Vector3 moveVector = transform.position + horizontalInput * Vector3.right * speed;
+        Vector3 moveVector = transform.position + horizontalInput * Vector3.right * speed * speedMultiplier;
         rb.MovePosition(moveVector);
     }
 
@@ -79,6 +117,11 @@ public class CharacterMovement : MonoBehaviour
     private void takeDamage(int dmg)
     {
         health -= dmg;
+
+        if (health <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     /// <summary>
@@ -95,5 +138,30 @@ public class CharacterMovement : MonoBehaviour
         Debug.Log(grounded);
         
         return grounded;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Trap")
+        {
+            takeDamage(1);
+        }
+
+        if (collision.collider.tag == "JumpBoost")
+        {
+            jumpBoostTimer = 30;
+        }
+
+        if (collision.collider.tag == "SpeedBoost")
+        {
+            speedBoostTimer = 5;
+            speedMultiplier = 2;
+        }
+
+        if (collision.collider.tag == "ScorePickup")
+        {
+            Destroy(collision.gameObject);
+            Debug.Log("Score added");
+        }
     }
 }
