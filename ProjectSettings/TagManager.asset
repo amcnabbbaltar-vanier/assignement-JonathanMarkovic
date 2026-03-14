@@ -8,6 +8,8 @@ TagManager:
   - JumpBoost
   - SpeedBoost
   - ScorePickup
+  - Flag
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -163,5 +163,11 @@ public class CharacterMovement : MonoBehaviour
             Destroy(collision.gameObject);
             Debug.Log("Score added");
         }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log("Loading NExt Scene");
+        }
     }
 }
