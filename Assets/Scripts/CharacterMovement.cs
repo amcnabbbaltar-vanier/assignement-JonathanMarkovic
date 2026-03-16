@@ -139,7 +139,7 @@ public class CharacterMovement : MonoBehaviour
         Vector3 rayDirection = Vector3.down;
 
         bool grounded =  Physics.Raycast(rayStartPosition, rayDirection, raycastDistance, ground);
-        Debug.Log(grounded);
+        //Debug.Log(grounded);
         
         return grounded;
     }
@@ -165,13 +165,14 @@ public class CharacterMovement : MonoBehaviour
         if (collision.collider.tag == "ScorePickup")
         {
             Destroy(collision.gameObject);
-            Debug.Log("Score added");
+            //Debug.Log("Score added");
+            GameManager.Instance.AddScore(50);
         }
 
         if (collision.gameObject.tag == "Player")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            Debug.Log("Loading NExt Scene");
+            Debug.Log("Loading Next Scene");
         }
     }
 }

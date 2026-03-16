@@ -21,7 +21,7 @@ public class CharacterAnimationManager : MonoBehaviour
     public void Update()
     {
         animator.SetFloat("CharacterSpeed", rb.velocity.magnitude);
-        Debug.Log(rb.velocity.magnitude);
+        //Debug.Log(rb.velocity.magnitude);
         animator.SetBool("isGrounded", movement.isGrounded());
         if (Input.GetButtonUp("Jump") && !movement.isGrounded())
         {

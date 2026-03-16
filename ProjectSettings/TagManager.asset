@@ -10,6 +10,7 @@ TagManager:
   - ScorePickup
   - Flag
   - Ground
+  - ScoreText
   layers:
   - Default
   - TransparentFX

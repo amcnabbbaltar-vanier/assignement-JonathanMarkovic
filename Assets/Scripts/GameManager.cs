@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scoreText = GameObject.FindWithTag("ScoreText").GetComponent<Text>();
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -26,6 +27,13 @@ public class GameManager : MonoBehaviour
         {
             health = 3;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
     }
 
     public void AddScore(int amount)
