@@ -986,6 +986,10 @@ PrefabInstance:
       propertyPath: speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5350154158508262512, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
+      propertyPath: particle
+      value: 
+      objectReference: {fileID: 1662183172}
     - target: {fileID: 6129578367967161269, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1236,6 +1240,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68f0602f541ac0d41a86d7f8fcbcd41e, type: 3}
+--- !u!198 &1662183172 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7434965968748466718, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
+  m_PrefabInstance: {fileID: 1130046800}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1664966392 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7962865894038970681, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
@@ -1397,8 +1406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 287407477}
+  score: 0
   healthText: {fileID: 1664966392}
   health: 0
+  timerText: {fileID: 1790772029}
 --- !u!4 &1714390279
 Transform:
   m_ObjectHideFlags: 0
@@ -1416,6 +1427,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1790772029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5836554544196735072, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
+  m_PrefabInstance: {fileID: 1970915625525657349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1889186999 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5846182265613574569, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
@@ -1984,6 +2006,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1714390279}
     m_Modifications:
+    - target: {fileID: 472029621406111944, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -297.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 472029621406111944, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 54.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1109448753095120977, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
       propertyPath: m_FillCenter
       value: 0
@@ -1999,6 +2029,10 @@ PrefabInstance:
     - target: {fileID: 3362818780569752750, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652131083890451453, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
+      propertyPath: m_Name
+      value: TimerText
       objectReference: {fileID: 0}
     - target: {fileID: 3675568388931104318, guid: 8b2e7a3ac6aed9b47a838a3ec7e06018, type: 3}
       propertyPath: m_Name

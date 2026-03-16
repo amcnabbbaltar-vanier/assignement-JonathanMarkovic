@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class CharacterMovement : MonoBehaviour
     private bool canDoubleJump;
     public LayerMask ground;
     private float raycastDistance = 1.0f;
+    public ParticleSystem particle;
 
     //status timers
     private float jumpBoostTimer = 0;
@@ -69,6 +71,8 @@ public class CharacterMovement : MonoBehaviour
                 if (!isGrounded())
                 {
                     canDoubleJump = false;
+                    particle.Play();
+                    Invoke("stopParticles", 1.0f);
                 }
                 else
                 {
@@ -101,6 +105,11 @@ public class CharacterMovement : MonoBehaviour
             speedBoostTimer = 0;
             speedMultiplier = 1.0f;
         }
+    }
+
+    private void stopParticles()
+    {
+        particle.Stop();
     }
 
     private void FixedUpdate()
