@@ -24,6 +24,7 @@ public class EndGameController : MonoBehaviour
 
     public void MainMenu()
     {
+        GameManager.Instance.Reset();
         SceneManager.LoadScene(0);
     }
 
