@@ -10,7 +10,7 @@ public class CharacterMovement : MonoBehaviour
     private Text scoreText;
     private bool canDoubleJump;
     public LayerMask ground;
-    private float raycastDistance = 0.5f;
+    private float raycastDistance = 1.0f;
 
     //status timers
     private float jumpBoostTimer = 0;
@@ -20,7 +20,7 @@ public class CharacterMovement : MonoBehaviour
     public float jumpForce = 10.0f;
     public int health = 3;
     private float jumpTimer = 0;
-    public float speed = 0.5f;
+    public float speed = 5.0f;
     private float speedMultiplier = 1;
 
     // Start is called before the first frame update
@@ -53,10 +53,10 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed = 1.0f;
+            speed = 10f;
         } else
         {
-            speed = 0.5f;
+            speed = 5f;
         }
 
         //* Get Jumping
@@ -84,7 +84,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (jumpBoostTimer > 0)
         {
-            Debug.Log("Bouncy");
+            //Debug.Log("Bouncy");
             jumpBoostTimer -= Time.deltaTime;
         } else
         {
@@ -94,7 +94,7 @@ public class CharacterMovement : MonoBehaviour
         if (speedBoostTimer > 0)
         {
             speedBoostTimer -= Time.deltaTime;
-            Debug.Log("Super Fast" + speedMultiplier);
+            //Debug.Log("Super Fast" + speedMultiplier);
         }
         else
         {
@@ -106,8 +106,11 @@ public class CharacterMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //* Moving the player based on input
-        Vector3 moveVector = transform.position + horizontalInput * Vector3.right * speed * speedMultiplier;
-        rb.MovePosition(moveVector);
+        //Vector3 moveVector = transform.position + horizontalInput * Vector3.right * speed * speedMultiplier;
+        //rb.MovePosition(moveVector);
+        Vector3 velocity = new Vector3(horizontalInput * speed * speedMultiplier, rb.velocity.y, 0);
+
+        rb.velocity = velocity;
     }
 
     /// <summary>
@@ -116,9 +119,10 @@ public class CharacterMovement : MonoBehaviour
     /// <param name="dmg">The amount of health the player will lose</param>
     private void takeDamage(int dmg)
     {
-        health -= dmg;
+        //health -= dmg;
+        GameManager.Instance.TakeDamage(1);
 
-        if (health <= 0)
+        if (GameManager.Instance.health == 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -128,7 +132,7 @@ public class CharacterMovement : MonoBehaviour
     /// Checks if the player character is on the ground
     /// </summary>
     /// <returns>Returns true if the player is on the ground</returns>
-    private bool isGrounded()
+    public bool isGrounded()
     {
         Vector3 rayStartPosition = transform.position + Vector3.up * 0.1f;
 
