@@ -18,7 +18,7 @@ public class EndGameController : MonoBehaviour
 
         if (GameManager.Instance)
         {
-            scoreText.text = "Score: " + GameManager.Instance.scoreText + "";
+            scoreText = GameManager.Instance.scoreText;
         }
     }
 

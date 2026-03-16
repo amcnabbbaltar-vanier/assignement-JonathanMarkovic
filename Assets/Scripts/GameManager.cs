@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public Text scoreText;
-    private int score = 0;
+    public int score = 0;
     public Text healthText;
     public int health = 0;
 
@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health -= amount;
+
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -53,6 +55,10 @@ public class GameManager : MonoBehaviour
         if (scoreText != null)
         {
             scoreText.text = $"Score: {score}";
+        }
+        if (healthText != null)
+        {
+            healthText.text = $"Health: {health}";
         }
     }
 }

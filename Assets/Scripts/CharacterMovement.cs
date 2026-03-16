@@ -122,8 +122,10 @@ public class CharacterMovement : MonoBehaviour
         //health -= dmg;
         GameManager.Instance.TakeDamage(1);
 
-        if (GameManager.Instance.health == 0)
+        if (GameManager.Instance.health <= 0)
         {
+            GameManager.Instance.health = 3;
+            GameManager.Instance.score = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
